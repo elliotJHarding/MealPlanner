@@ -12,6 +12,10 @@
             @android:color/transparent
         </item>
 
+        <item name="android:windowLightStatusBar">
+            true
+        </item>
+
     </style>
 
     <style name="Theme.MealPlanner" parent="Base.Theme.MealPlanner" />

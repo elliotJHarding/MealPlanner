@@ -7,16 +7,23 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.harding.mealplanner.R;
+import com.harding.mealplanner.domain.Recipe;
+
+import java.util.List;
 
 public class RecipesFragment extends Fragment {
 
     private RecipesViewModel mViewModel;
+
+    private RecyclerView recipeList;
 
     public static RecipesFragment newInstance() {
         return new RecipesFragment();
@@ -25,7 +32,21 @@ public class RecipesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recipes, container, false);
+
+        List<Recipe> recipes = List.of(
+            new Recipe("Bolognese"),
+            new Recipe("Shakshuka"),
+            new Recipe("Morrocan Meatballs")
+        );
+
+        View view = inflater.inflate(R.layout.fragment_recipes, container, false);
+
+        recipeList = view.findViewById(R.id.recipe_list);
+        recipeList.setHasFixedSize(true);
+        recipeList.setLayoutManager(new LinearLayoutManager(getContext()));
+        recipeList.setAdapter(new RecipeAdapter(recipes));
+
+        return view;
     }
 
     @Override
